@@ -1,12 +1,15 @@
 import time
 
 import cv2
-import numpy as np
+import numpy as np  //for numerical processing.
 
-confid = 0.5
-thresh = 0.5
+confid = 0.5 //define the minimum object detection confidence(how likely the bounding box contains the object)
+               
+thresh = 0.5// non-maxima suppression threshold.
+//It would be far worse if your detector either (1) reported a false positive (i.e. detected a face where one wasn’t) or (2) failed to detect a face.
+//To fix this situation we’ll need to apply Non-Maximum Suppression (NMS), also called Non-Maxima Suppression.
 
-vid_path = "./videos/ved4.mp4"
+vid_path = "./videos/ved4.mp4" 
 
 
 # Calibration needed for each video
