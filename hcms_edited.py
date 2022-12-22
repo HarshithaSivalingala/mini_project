@@ -1,13 +1,17 @@
 import time
 
 import cv2
-import numpy as np  //for numerical processing.
+import numpy as np  #for numerical processing.
 
-confid = 0.5 //define the minimum object detection confidence(how likely the bounding box contains the object)
+confid = 0.5 #define the minimum object detection confidence(how likely the bounding box contains the object)
                
-thresh = 0.5// non-maxima suppression threshold.
-//It would be far worse if your detector either (1) reported a false positive (i.e. detected a face where one wasn’t) or (2) failed to detect a face.
-//To fix this situation we’ll need to apply Non-Maximum Suppression (NMS), also called Non-Maxima Suppression.
+thresh = 0.5 # non-maxima suppression threshold.
+#It would be far worse if your detector either (1) reported a false positive (i.e. detected a face where one wasn’t) or (2) failed to detect a face.
+#To fix this situation we’ll need to apply Non-Maximum Suppression (NMS), also called Non-Maxima Suppression.
+#The Non Maximum Suppression is controlled by the nmsThreshold parameter. 
+#If nmsThreshold is set too low, e.g. 0.1, we might not detect overlapping objects of same or different classes. 
+#But if it is set too high e.g. 1, then we get multiple boxes for the same object. So we used an intermediate value of 0.4 in our code above. 
+
 
 vid_path = "./videos/ved4.mp4" 
 
@@ -29,12 +33,12 @@ def isclose(p1, p2):
         return 0
 
 
-labelsPath = "./coco.names"
-LABELS = open(labelsPath).read().strip().split("\n")
+labelsPath = "./coco.names" #dataset
+LABELS = open(labelsPath).read().strip().split("\n") #we load our load COCO labels.
 
-np.random.seed(42)
+np.random.seed(42) #The numpy random seed is a numerical value that generates a new set or repeats pseudo-random numbers.
 
-weightsPath = "./yolov3.weights"
+weightsPath = "./yolov3.weights" # define our YOLO paths. derive the paths to the YOLO weights and model configuration
 configPath = "./yolov3.cfg"
 
 ###### use this for faster processing (caution: slighly lower accuracy) ###########
